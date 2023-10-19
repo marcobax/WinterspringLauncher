@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ApplicationIcon>launcher.ico</ApplicationIcon>
+    <Authors>_BLU</Authors>
+    <ImplicitUsings>true</ImplicitUsings>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(UsePublishBuildSettings)' == 'true'">
+    <!-- Build/Publish config -->
+    <!-- we HAVE to set some runtime :(   We overwrite this with 'use-current-runtime' inside build process -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract Condition="$([MSBuild]::IsOSPlatform('Windows'))">true</IncludeNativeLibrariesForSelfExtract>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+    <DefineConstants>PLATFORM_WINDOWS</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+    <EmbeddedResource Include="7z.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="HermesDataPatches/**/*" />
+  </ItemGroup>
+
+  <ItemGroup>
+
+    <PackageReference Include="Squid-Box.SevenZipSharp" Version="1.6.1.23" />
+  </ItemGroup>
+
+</Project>
