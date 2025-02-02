@@ -33,7 +33,7 @@ jobs:
         run: cp -r ./WinterspringLauncher/bin/Release/*/publish/ publish
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.6.0
         with:
           name: WinterspringLauncher-${{ matrix.os }}-${{ runner.arch }}-${{ github.sha }}
           path: publish
@@ -47,7 +47,7 @@ jobs:
 
     steps:
       - name: Checkout repository content
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
 
@@ -76,7 +76,7 @@ jobs:
           zip -vr ../../WinterspringLauncher-${{ matrix.os }}-arm64-${{ github.sha }}-APP.zip *
 
       - name: Upload .app
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.6.0
         with:
           name: WinterspringLauncher-${{ matrix.os }}-arm64-${{ github.sha }}.app
           path: WinterspringLauncher-${{ matrix.os }}-arm64-${{ github.sha }}-APP.zip
@@ -90,7 +90,7 @@ jobs:
         run: ./build_dmg.sh
 
       - name: Upload .dmg
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.6.0
         with:
           name: WinterspringLauncher-${{ matrix.os }}-arm64-${{ github.sha }}.dmg
           path: MacAppBuilding/output_dmg/
